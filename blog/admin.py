@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Post
+from .models import Category, Post, Author, Comment, PostView
 
 
 @admin.register(Category)
@@ -14,3 +14,18 @@ class PostAdmin(admin.ModelAdmin):
                     'created', 'updated']
     prepopulated_fields = {'slug': ('title',)}
 
+
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ['user']
+   
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['user']
+
+
+@admin.register(PostView)
+class PostViewAdmin(admin.ModelAdmin):
+    list_display = ['user']

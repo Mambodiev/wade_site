@@ -1,7 +1,11 @@
+from audioop import reverse
 from multiprocessing import context
+from xml.etree.ElementTree import Comment
 from django.shortcuts import get_object_or_404, render
-from django.shortcuts import render
-from .models import Category, Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import redirect, render, reverse
+from .models import Category, Post, Like, PostView
+from .forms import CommentForm
 
 
 def categories(request):
@@ -11,19 +15,30 @@ def categories(request):
 
 
 def home(request):
-
     posts = Post.objects.all()
-
     context = {
         'posts': posts
         }
-
     return render(request, 'blog/home.html', context)
 
 
-def post_all(request):
-    posts = Post.objects.all()
-    return render(request, 'blog/home.html', {'posts': posts})
+def post(request):
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list,4)
+    page_request_var = 'page'
+    page = request.GET.get('page_request_var')
+    try:
+        paginated_queryset = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_queryset = paginator.page(1)
+    except EmptyPage:
+        paginated_queryset = paginator.page(paginator.num_pages)
+
+    context = {
+        'queryset': paginated_queryset,
+        'page_request_var': page_request_var,
+        }
+    return render(request, 'blog/posts/blog.html', context)
 
 
 def category_list(request, category_slug=None):
@@ -34,4 +49,31 @@ def category_list(request, category_slug=None):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/posts/detail.html', {'post': post})
+
+    PostView.objects.get_or_create(user=request.user, post=post)
+
+    form = CommentForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return redirect(reverse('post_detail', kwargs={
+                'id':post.pk            
+            }))
+    context = {
+        'form':form,
+        'post': post
+        }
+
+    return render(request, 'blog/posts/detail.html', context)
+
+
+def like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    like_qs = Like.objects.filter(user=request.user, post=post)
+    if like_qs.exists():
+        like_qs[0].delete()
+        return redirect('detail', slug=slug)
+    Like.objects.create(user=request.user, post=post)
+    return redirect('detail', slug=slug)

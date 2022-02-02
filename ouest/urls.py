@@ -7,10 +7,11 @@ from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('', include('blog.urls', namespace='blog')),
     path('_ckeditor/', include('ckeditor_uploader.urls')),
     path('core', include('core.urls')),
-    path('', views.post_all, name='post_all'),
+
 ]
 
 
