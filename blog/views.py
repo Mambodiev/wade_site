@@ -1,10 +1,8 @@
 from audioop import reverse
-from multiprocessing import context
-from xml.etree.ElementTree import Comment
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render, reverse
-from .models import Category, Post, Like, PostView
+from .models import Category, Post, PostView, PostLike
 from .forms import CommentForm
 
 
@@ -49,15 +47,19 @@ def category_list(request, category_slug=None):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    if request.user.is_active:
+        PostView.objects.get_or_create(user=request.user, post=post)
 
-    PostView.objects.get_or_create(user=request.user, post=post)
+
 
     form = CommentForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.instance.user = request.user
-            form.instance.post = post
-            form.save()
+            if request.user.is_active:
+
+                form.instance.user = request.user
+                form.instance.post = post
+                form.save()
             return redirect(reverse('post_detail', kwargs={
                 'id':post.pk            
             }))
@@ -71,9 +73,12 @@ def post_detail(request, slug):
 
 def like(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    like_qs = Like.objects.filter(user=request.user, post=post)
+    if request.user.is_active:
+        like_qs = PostLike.objects.filter(user=request.user, post=post)
     if like_qs.exists():
         like_qs[0].delete()
         return redirect('detail', slug=slug)
-    Like.objects.create(user=request.user, post=post)
+    if request.user.is_active:
+
+        PostLike.objects.create(user=request.user, post=post)
     return redirect('detail', slug=slug)

@@ -48,7 +48,9 @@
                         <ul class="list-inline list-unstyled">
                             <li class="list-inline-item d-lg-block my-lg-2">{{ post.created }}</li>
                             <li class="list-inline-item d-lg-block my-lg-2">5 min read</li>
-                            <li class="list-inline-item d-lg-block my-lg-2"><a href="{{ object.get_like_url }}" class="text-body"><i class="far fa-heart me-1"></i></a>{{ object.get_like_count }}</li>
+                            
+                            <li class="list-inline-item d-lg-block my-lg-2"><a href="{{ object.get_like_url }}" class="text-body"><i class="far fa-heart me-1"></i></a> {{ post.get_like_count }}
+                            </li>
                             <li class="list-inline-item d-lg-block my-lg-2"><i class="far fa-eye me-1"></i> {{ post.get_view_count }} Views</li>
                         </ul>
                         <!-- Tags -->

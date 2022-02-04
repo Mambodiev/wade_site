@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Post, Author, Comment, PostView
+from .models import Category, Post, PostView, Author, Comment, PostLike
 
 
 @admin.register(Category)
@@ -28,4 +28,9 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(PostView)
 class PostViewAdmin(admin.ModelAdmin):
+    list_display = ['user']
+
+
+@admin.register(PostLike)
+class PostLikeAdmin(admin.ModelAdmin):
     list_display = ['user']

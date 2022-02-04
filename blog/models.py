@@ -1,5 +1,3 @@
-#from django.conf import settings
-from xml.etree.ElementTree import Comment
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -24,12 +22,7 @@ class Category(models.Model):
 
 
 
-class PostView(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user.username
 
 
 
@@ -95,13 +88,21 @@ class Post(models.Model):
             return Comment.objects.filter(post=self).count()
 
         @property
-        def view_count(self):
-            return PostView.objects.filter(post=self).count()
+        def get_view_count(self):
+            return self.postview_set.all().count()
+
+        
+        @property
+        def get_like_count(self):
+            return self.postlike_set.all().count()
 
 
 
         def __str__(self):
             return self.title
+
+
+
 
 
 class Comment(models.Model):
@@ -114,14 +115,20 @@ class Comment(models.Model):
     def __str__(self):
         return self.user.username
 
-        
-
-class Like(models.Model):
+    
+class PostView(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    # timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
 
 
+class PostLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
