@@ -39,7 +39,7 @@ class BlogAboutView(TemplateView):
 
 
 
-class BlogSignupView(View):
+class BlogSignupView(LoginView):
     model = Signup
     template_name = 'core/signup.html'
 

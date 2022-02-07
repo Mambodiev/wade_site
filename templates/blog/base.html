@@ -15,8 +15,13 @@
 	
 
 	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+	{% comment %} <link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet"> {% endcomment %}
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+	
 
 	<!-- Plugins CSS -->
 	<link rel="stylesheet" type="text/css" href="{% static '/vendor/font-awesome/css/all.min.css' %}">
@@ -160,7 +165,7 @@
 				<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="text-body h6 d-none d-sm-inline-block">Menu</span>
 				<span class="navbar-toggler-icon"></span>
-			</button>
+				</button>
 
 				<!-- Main navbar START -->
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -173,6 +178,9 @@
 								<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
 							</li>
 						{% endfor %}
+						<li class="nav-item">	
+							<a class="nav-link" href="{% url 'content:video' %}">Video</a>
+						</li>
 					</ul>
 				</div>
 				<!-- Main navbar END -->
