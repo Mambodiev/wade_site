@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
-from .models import Category, Video
+from .models import Video_category, Video
 
 
 def categories(request):
     return {
-        'categories': Category.objects.all()
+        'categories': Video_category.objects.all()
     }
 
 
@@ -20,7 +20,7 @@ def video(request):
 
 
 def category_list(request, category_slug=None):
-    category = get_object_or_404(Category, slug=category_slug)
+    category = get_object_or_404(Video_category, slug=category_slug)
     videos = Video.objects.filter(category=category)
     return render(request, 'content/list.html', {'category': category, 'videos': videos})
 

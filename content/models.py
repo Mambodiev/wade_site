@@ -6,12 +6,12 @@ from django.db.models.signals import pre_save, post_save
 # Create your models here.
 
 
-class Category(models.Model):
+class Video_category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = 'Video_categories'
     
     def get_absolute_url(self):
         return reverse('content:course-list', args=[self.slug])
@@ -22,7 +22,7 @@ class Category(models.Model):
 
 
 class Video(models.Model):
-    category = models.ForeignKey(Category, related_name='video', on_delete=models.CASCADE)
+    video_category = models.ForeignKey(Video_category, related_name='video', on_delete=models.CASCADE)
     vimeo_id = models.CharField(max_length=50)
     title = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images/', default='images/default.png')

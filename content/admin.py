@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Category, Video
+from .models import Video_category, Video
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(Video_category)
+class Video_categoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
