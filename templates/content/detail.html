@@ -11,7 +11,7 @@ Main hero START -->
 <section class="pt-4 pb-0 card-grid">
 	<div class="container">
 		<div class="row g-4">
-            <div class="col-5">
+            {% comment %} <div class="col-5">
                 <div class="card card-overlay-bottom card-fold h-400 h-lg-540" style="background-image:url({{ video.image.url }}); background-position: center left; background-size: cover;">
                     <!-- Card Image overlay -->
                     <div class="card-img-overlay d-flex flex-column p-3 p-sm-5">
@@ -31,13 +31,20 @@ Main hero START -->
                         </div>
                     </div>
                 </div>
+            </div> {% endcomment %}
+            <div class="col-md-5">
+                {% comment %} <img class="rounded-3" src="assets/images/blog/4by3/06.jpg" alt=""> {% endcomment %}
+                <div class="card">
+
+                <iframe src="https://player.vimeo.com/video/{{ video.vimeo_id }}" width="100%" height="100%" class="rounded-3" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
 			<div class="col-lg-7">
 				<div class="card bg-transparent mb-4">
                     <div class="row">
                         <div class="col-md-7 mt-3 mt-md-0">
-                            <h3><a href="#" class="btn-link stretched-link text-dark fw-bold">5 reasons why you shouldn't startup</a></h3>
-                            <p>Given and shown creating curiously to more in are man were smaller by we instead the these sighed Avoid in the sufficient me real man longer of his how her for countries to brains warned notch important Finds be to the of on the increased explain noise of power deep asking contribution this live of suppliers goals bit separated poured sort several the was </p>
+                            <h3>{{ video.title }}</h3>
+                            <p>{{ video.description }}</p>
 
                             <!-- Card info -->
                             <ul class="list-inline">
@@ -51,35 +58,66 @@ Main hero START -->
                         <div class="col-md-5">
                             <!-- Comments START -->
                             <div>
-                                <h3>5 comments</h3>
+                                <h3>{{ video.comments.count}} comments</h3>
                                 <!-- Comment level 1-->
+                                {% for comment in video.comment_set.all %}
+                                {% if comment.approved %}
                                 <div class="my-4 d-flex">
-                                    <img class="avatar avatar-xs rounded-circle float-start me-3" src="{% static 'images/avatar/01.jpg' %}" alt="avatar">
-                                    <div>
+                                     {% if comment.user.author %}
+                                    <img class="avatar avatar-xs rounded-circle float-start me-3" src="{{ comment.user.author.profile_picture.url }}" alt="avatar">
+                                    {% else %}
+                                    <img class="avatar avatar-xs rounded-circle float-start me-3" src="{% static 'images/avatar/01.jpg' %}"
+                                    {% endif %}
+                                    <div> 
                                         <div class="mb-2">
-                                            <h5 class="m-0">Allen Smith</h5>
-                                            <span class="me-3 small">June 11, 2021 at 6:01 am </span>
-                                            <a href="#" class="text-body fw-normal">Reply</a>
+                                            <h5 class="m-0">{{ comment.user.username }}</h5>
+                                            <span class="me-3 small">{{ comment.timestamp|timesince }} ago</span>
                                         </div>
-                                        <p>Satisfied conveying a dependent contented he gentleman agreeable do be.</p>
+                                        <p>{{ comment.content }}</p>
                                     </div>
-                                </div>
+                                </div> 
+                                {% endif %}
+                                {% endfor %}
                             </div>
                             <!-- Comments END -->
                             <!-- Reply START -->
                             {% if request.user.is_authenticated %}
                             <div>
-                                <h3>Leave a reply</h3>
-                                <form method="POST" action="." class="row g-3 mt-2">
-                                    {% csrf_token %} 
-                                <div class="col-12">
-                                    {{ form }}
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Post comment</button>
-                                </div>
+                                <form class="review-form" 
+                                    action="/content/addcomment/{{ video.id }}" method="post">
+                                    {% csrf_token %}
+                                    {% comment %} <div class="row">
+                                        <div class="col-md-12">
+                                        <label class="sr-only" for="reviewText">Review:</label>
+                                        <textarea class="form-control form-control-sm" name="comment" rows="5" placeholder="Your review " required></textarea>
+                                        </div>
+                                    </div><br>
+                                    <div class="row">
+                                        <div class="d-flex justify-content-between">
+                                            {% if user.id is not None %}
+                                            <button class="btn btn-primary btn-sm btn-block" type="submit">
+                                            Post Review
+                                            </button>
+                                            {% else %}
+                                            You must be logged in to post a review
+                                            {% endif %}
+                                        </div>
+                                    </div> {% endcomment %}
+                                    
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Leave a reply</label>
+                                        <textarea class="form-control" name='content' id="exampleFormControlTextarea1" rows="3" placeholder="Your comment"></textarea>
+                                      </div>
+                                      {% if user.id is not None %}
+                                      <div class="d-grid gap-2">
+                                        <button class="btn btn-primary btn-sm" type="submit">Post comment</button>
+                                      </div> 
+                                      {% else %}
+                                      You must be logged in to post a review
+                                    {% endif %}
                                 </form>
                             </div>
+                              
                             {% endif %}
                             <!-- Reply END -->
                         </div>
@@ -107,8 +145,7 @@ Section START -->
 			<div class="col-md-12">
 				<!-- Title -->
 				<div class="mb-4 d-md-flex justify-content-between align-items-center">
-					<h2 class="m-0">Même catégorie</h2>
-					<a href="#" class="text-body small"><u>Content by: Bootstrap</u></a>
+					<h2 class="m-0">Et plus encore</h2>
 				</div>
 				<div class="tiny-slider arrow-hover arrow-blur arrow-dark arrow-round">
 					<div class="tiny-slider-inner"
@@ -123,21 +160,36 @@ Section START -->
 						data-items-xs="1">
 
 						<!-- Card item START -->
-                        {% for video in videos  %}
+                        {% for video in related_video %}
                             <div class="card">
-                              
-                                <div class="card card-overlay-bottom card-grid-sm card-bg-scale" style="background-image:url({{ video.image.url }}); background-position: center left; background-size: cover;">
+                                <div class="card card-overlay-bottom card-grid-sm card-bg-scale" style="background-image:url({{ video.related_video.image.url }}); background-position: center left; background-size: cover;">
                                     <!-- Card Image overlay -->
                                     <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
                                         <div class="w-100 mt-auto">
                                             <!-- Card title -->
-                                        <h4 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link stretched-link text-reset">{{ video.title }}</a></h4>
+                                        <h4 class="text-white"><a href="{{ video.related_video.get_absolute_url }}" class="btn-link stretched-link text-reset">{{ video.related_video.title }}</a></h4>
                                         <!-- Card info -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
+
+                        {% if video.related_video %}
+                                
+
+                                <div class="card card-img-scale">
+                                    <!-- Card Image -->
+                                    <img class="card-img h-200" src="{{ video.related_video.image.url }}" alt="">
+                                    <!-- Card Image overlay -->
+                                    <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
+                                        <div class="w-100 mt-auto">
+                                            <!-- Card title -->
+                                            <h6 class="text-white"><a href="{{ video.related_video.get_absolute_url }}" class="btn-link text-reset stretched-link">{{ video.related_video.title }}</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
 						<!-- Card item END -->
 						
 					</div>

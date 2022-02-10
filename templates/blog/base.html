@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class='col-lg-9 mx-auto'>
+	
 	<!-- Offcanvas START -->
 	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
 		<div class="offcanvas-header justify-content-end">
@@ -79,142 +79,103 @@
 		</div>
 	</div>
 	<!-- Offcanvas END -->
-
 	<!-- =======================
 	Header START -->
 	<header class="navbar-light navbar-sticky header-static">
-		<div class="navbar-top d-none d-lg-block small">
-			<div class="container">
-				<div class="d-md-flex justify-content-between align-items-center my-2">
-					<!-- Top bar left -->
-					<ul class="nav">
-						<li class="nav-item">
-							<a class="nav-link ps-0" href="{% url 'core:about' %}">About</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Forum</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="https://themes.getbootstrap.com/store/webestica/">Buy now!</a>
-						</li>
-						{% if user.id is not None %}
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'core:login' %}">Login / Join</a>
-						</li>
-						{% else %}
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'core:signup' %}">Login / Join</a>
-						</li>
-						{% endif %}
-					</ul>
-					<!-- Top bar right -->
-					<div class="d-flex align-items-center">
-						<ul class="nav">
-							<li class="nav-item">
-								<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-facebook-square"></i></a>
+		<!-- Logo Nav START -->
+		<div class='col-lg-9 mx-auto'>
+			<nav class="navbar navbar-expand-lg" id='navbarheight'>
+				<div class="container">
+					<!-- Logo START -->
+					<a class="navbar-brand py-0"  href="{% url 'home' %}">
+						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">			
+						<img class="navbar-brand-item dark-mode-item" src="{% static  'images/logo-light.svg' %}" alt="logo">			
+					</a>
+					<!-- Logo END -->
+
+					<!-- Responsive navbar toggler -->
+					<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="text-body h6 d-none d-sm-inline-block">Menu</span>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Main navbar START -->
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav navbar-nav-scroll mx-auto">
+							<li class="nav-item">	
+								<a class="nav-link" href="{% url 'blog:post' %}">All</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-twitter-square"></i></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-linkedin"></i></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link px-2 fs-5" href="#"><i class="fab fa-youtube-square"></i></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link ps-2 pe-0 fs-5" href="#"><i class="fab fa-vimeo"></i></a>
+							{% for c in categories %}
+								<li {% if category.slug == c.slug %}class="nav-item" {% endif %}>	
+									<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+								</li>
+							{% endfor %}
+							<li class="nav-item">	
+								<a class="nav-link" href="{% url 'content:video' %}">Video</a>
 							</li>
 						</ul>
 					</div>
-				</div>
-				<!-- Divider -->
-				<div class="border-bottom border-2 border-primary opacity-1"></div>
-			</div>
-		</div>
+					<!-- Main navbar END -->
 
-		<!-- Logo Nav START -->
-		<nav class="navbar navbar-expand-lg">
-			<div class="container">
-				<!-- Logo START -->
-				<a class="navbar-brand"  href="{% url 'home' %}">
-					<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">			
-					<img class="navbar-brand-item dark-mode-item" src="{% static  'images/logo-light.svg' %}" alt="logo">			
-				</a>
-				<!-- Logo END -->
+					<!-- Nav right START -->
+					<div class="nav flex-nowrap align-items-center">
+						<!-- Nav Button -->
 
-				<!-- Responsive navbar toggler -->
-				<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="text-body h6 d-none d-sm-inline-block">Menu</span>
-					<span class="navbar-toggler-icon"></span>
-				</button>
+						<!-- Nav Search -->
+						<div class="nav-item dropdown dropdown-toggle-icon-none nav-search">
+							<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-search fs-5"> </i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
+							<form class="input-group">
+								<input class="form-control border-success" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-success m-0" type="submit">Search</button>
+							</form>
+							</div>
+						</div>
+						<!-- End Nav Search -->
 
-				<!-- Main navbar START -->
-				<div class="collapse navbar-collapse" id="navbarCollapse">
-					<ul class="navbar-nav navbar-nav-scroll mx-auto">
-						<li class="nav-item">	
-							<a class="nav-link" href="{% url 'blog:post' %}">All</a>
-						</li>
-						{% for c in categories %}
-							<li {% if category.slug == c.slug %}class="nav-item" {% endif %}>	
-								<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-							</li>
-						{% endfor %}
-						<li class="nav-item">	
-							<a class="nav-link" href="{% url 'content:video' %}">Video</a>
-						</li>
-					</ul>
-				</div>
-				<!-- Main navbar END -->
+						<!-- LANGUAGE -->
+						<div class="nav-item ">
+						<a class="nav-link fw-bolder" href="#">
+								<h5 class='mb-0'>.FR</h5>
+							</a>
+						</div>
+						<!-- End LANGUAGE -->
 
-				<!-- Nav right START -->
-				<div class="nav flex-nowrap align-items-center">
-					<!-- Nav Button -->
-					<div class="nav-item d-none d-md-block">
-						<a href="{% url 'home' %}" class="btn btn-sm btn-danger mb-0 mx-2">Subscribe!</a>
-					</div>
-					<!-- Nav user -->
-					<div class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="bi bi-person-square fs-4"></i>
-						</a>
-					</div>
-					<!-- End Nav user -->
-					<!-- Nav Search -->
-					<div class="nav-item dropdown dropdown-toggle-icon-none nav-search">
-						<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-search fs-4"> </i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
-						<form class="input-group">
-							<input class="form-control border-success" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-success m-0" type="submit">Search</button>
-						</form>
+						<!-- Offcanvas menu toggler -->
+						<div class="nav-item">
+							<a class="nav-link p-0" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+								<i class="bi bi-text-right rtl-flip fs-2" data-bs-target="#offcanvasMenu"> </i>
+							</a>
 						</div>
 					</div>
-					<!-- End Nav Search -->
-
-					<!-- Offcanvas menu toggler -->
-					<div class="nav-item">
-						<a class="nav-link p-0" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-							<i class="bi bi-text-right rtl-flip fs-2" data-bs-target="#offcanvasMenu"> </i>
-						</a>
-					</div>
+					<!-- Nav right END -->
 				</div>
-				<!-- Nav right END -->
-			</div>
-		</nav>
+			</nav>
+		</div>
 		<!-- Logo Nav END -->
 	</header>
+
 	<!-- =======================
 	Header END -->
-    <div id="content">
-		{% block content %} {% endblock %}
-
-		{% include 'blog/footer.html' %}
-		
+	<div class='col-lg-9 mx-auto' id="content">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="container">
+		  <div class="alert alert-success {{ message.tags }} alert-dismissible fade show" role="alert">
+			{{ message }}			
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>
+		</div>
+		{% endfor %}
+	  {% endif %}
+		{% block content %} 
+		{% endblock %}
 	</div>
+
+	{% include 'blog/footer.html' %}	
+
 	{% include 'blog/script.html' %}
-</div>
 </body>
 </html>

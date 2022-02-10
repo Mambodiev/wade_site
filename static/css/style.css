@@ -16153,3 +16153,8 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
 .white{
   color: white!important;
 }
+/* navbar height */
+#navbarheight{
+  /* height: 60px; */
+}
+/* End navbar height */

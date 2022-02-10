@@ -28,24 +28,15 @@
     
                             <!-- Card item START -->
                             {% for video in all_videos %}
-                            <div class="card">
-                                <!-- Card img -->
-                                <div class="position-relative">
-                                    <img class="card-img" src="{{ video.image.url }}" alt="Card image">
-                                     <!-- Card Image overlay -->
-                                <div class="card-img-overlay d-flex flex-column p-3 p-sm-5">
-                                    <!-- Card play button -->
-                                    <div class="position-absolute top-50 start-50 mt-5 translate-middle pb-5">
-                                        <!-- Popup video -->
-                                        <a href="https://youtu.be/n_Cn8eFo7u8" class="icon-lg bg-primary d-block text-white rounded-circle" data-glightbox data-gallery="y-video">
-                                            <i class="bi bi-play-btn"></i>
-                                        </a>
+                            <div class="card card-overlay-bottom card-img-scale">
+                                <!-- Card Image -->
+                                <img class="card-img h-200" src="{{ video.image.url }}" alt="">
+                                <!-- Card Image overlay -->
+                                <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
+                                    <div class="w-100 mt-auto">
+                                        <!-- Card title -->
+                                        <h6 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset stretched-link">{{ video.title }}</a></h6>
                                     </div>
-                                    
-                                </div>
-                                </div>
-                                <div class="card-body px-0 pt-3">
-                                    <h5 class="card-title"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset fw-bold">{{ video.title }}</a></h5>
                                 </div>
                             </div>
                             

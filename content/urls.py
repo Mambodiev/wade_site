@@ -6,6 +6,7 @@ from . import views
 app_name = 'content'
 
 urlpatterns = [
+        path('addcomment/<int:id>', views.addcomment, name='addcomment'),
         path('video', views.video, name='video'),
         path('<slug:slug>', views.video_detail, name='video_detail'),
         path('<slug:category_slug>/', views.category_list, name='category_list'),
