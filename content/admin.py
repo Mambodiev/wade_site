@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Video_category, Video, Comment
+from .models import Video_category, Video, Comment, VideoView, VideoLike
 
 
 @admin.register(Video_category)
@@ -19,3 +19,13 @@ class VideoAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['user', 'content', 'approved', 'timestamp']
     list_editable = ['approved',]
+
+
+@admin.register(VideoView)
+class VideoViewAdmin(admin.ModelAdmin):
+    list_display = ['user']
+
+
+@admin.register(VideoLike)
+class VideoLikeAdmin(admin.ModelAdmin):
+    list_display = ['user']

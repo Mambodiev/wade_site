@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
-from django.contrib.auth import get_user_model 
-from django.db.models.signals import pre_save, post_save
 from django.forms import ModelForm
 
 
@@ -32,6 +30,7 @@ class Video(models.Model):
     image = models.ImageField(upload_to='images/', default='images/default.png')
     slug = models.SlugField(unique=True)
     description = models.TextField()
+    comment_count=models.IntegerField(default=0)
     related_video = models.ForeignKey(
         'self', related_name='related', on_delete=models.SET_NULL, blank=True, null=True)
     order = models.IntegerField(default=1)
@@ -49,20 +48,21 @@ class Video(models.Model):
     
     @property
     def get_comments(self):
-        return self.video_comment.all().order_by('-timestamp')
+        return self.comment.all().order_by('-timestamp')
 
     @property
     def comment_count(self):
         return Comment.objects.filter(video=self).count()
 
-def pre_save_course(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = slugify(instance.name)
+    @property
+    def get_view_count(self):
+            return self.videoview_set.all().count()
 
+        
+    @property
+    def get_like_count(self):
+        return self.videolike_set.all().count()
 
-def pre_save_video(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = slugify(instance.title)
 
 
 class Comment(models.Model):
@@ -79,3 +79,19 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+
+class VideoView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
+class VideoLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username

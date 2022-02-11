@@ -35,7 +35,7 @@
                         </div>
                     </li>
                     <li class="nav-item">{{ post.created|timesince }}</li>
-                    <li class="nav-item"><a href="{{ object.get_like_url }}" class="text-body"><i class="far fa-heart me-1"></i></a> {{ post.get_like_count }}</li>
+                    <li class="nav-item"><a href="{{ object.get_like_count }}" class="text-body"><i class="far fa-heart me-1"></i></a> {{ post.get_like_count }}</li>
                     <li class="nav-item">{{ post.get_view_count }} Views</li>
                 </ul>
             </div>
@@ -178,6 +178,7 @@
                         <h3>{{ post.comments.count}} comments</h3>
                         <!-- Comment level 1-->
                         {% for comment in post.get_comments %}
+                        {% if comment.approved %}
                         <div class="my-4 d-flex">
                            {% if comment.user.author %}
                           <img class="avatar avatar-md rounded-circle float-start me-3" src="{{ comment.user.author.profile_picture.url }}" alt="avatar">
@@ -192,6 +193,7 @@
                             <p>{{ comment.content }}</p>
                           </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                             
                     </div>
@@ -201,14 +203,20 @@
                     {% if request.user.is_authenticated %}
                     <div>
                         <h3>Leave a reply</h3>
-                        <form method="POST" action="." class="row g-3 mt-2">
-                            {% csrf_token %} 
-                          <div class="col-12">
-                            {{ form }}
-                          </div>
-                          <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Post comment</button>
-                          </div>
+                        <form class="review-form" 
+                            action="/addcomment/{{ post.id }}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Leave a reply</label>
+                                <textarea class="form-control" name='content' id="exampleFormControlTextarea1" rows="3" placeholder="Your comment"></textarea>
+                                </div>
+                                {% if user.id is not None %}
+                                <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-sm" type="submit">Post comment</button>
+                                </div> 
+                                {% else %}
+                                You must be logged in to post a review
+                            {% endif %}
                         </form>
                     </div>
                     {% endif %}

@@ -23,7 +23,8 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['user']
+    list_display = ['user', 'content', 'approved', 'timestamp']
+    list_editable = ['approved',]
 
 
 @admin.register(PostView)

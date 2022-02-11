@@ -3,6 +3,8 @@ from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model 
+from django.forms import ModelForm
+
 
 User = get_user_model()
 
@@ -79,6 +81,7 @@ class Post(models.Model):
                 'slug': self.slug
             })
         
+        
         @property
         def get_comments(self):
             return self.comments.all().order_by('-timestamp')
@@ -111,15 +114,22 @@ class Comment(models.Model):
     content = models.TextField(default='')
     post = models.ForeignKey(
         'Post', related_name='comments', on_delete=models.CASCADE)
+    approved=models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.user.username
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
 
     
 class PostView(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    # timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username

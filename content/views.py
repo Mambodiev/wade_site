@@ -1,7 +1,6 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import  HttpResponseRedirect
 from django.contrib import messages
-from django.shortcuts import redirect, render, reverse
-from django.views import generic
+from django.shortcuts import  render
 from django.shortcuts import get_object_or_404, render
 from .models import Video_category, Video
 from .forms import CommentForm, Comment
