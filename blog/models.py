@@ -97,7 +97,7 @@ class Post(models.Model):
         
         @property
         def get_like_count(self):
-            return self.postlike_set.all().count()
+            return self.like_set.all().count()
 
 
 
@@ -135,7 +135,7 @@ class PostView(models.Model):
         return self.user.username
 
 
-class PostLike(models.Model):
+class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 

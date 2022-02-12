@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render
-from .models import Category, Post, PostView, PostLike
+from .models import Category, Post, PostView, Like
 from .forms import CommentForm, Comment
 
 
@@ -66,7 +66,7 @@ def category_list(request, category_slug=None):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    if request.user.is_active:
+    if request.user.is_authenticated:
         PostView.objects.get_or_create(user=request.user, post=post)
 
 
@@ -79,12 +79,9 @@ def post_detail(request, slug):
 
 def like(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    if request.user.is_active:
-        like_qs = PostLike.objects.filter(user=request.user, post=post)
+    like_qs = Like.objects.filter(user=request.user, post=post)
     if like_qs.exists():
         like_qs[0].delete()
         return redirect('detail', slug=slug)
-    if request.user.is_active:
-
-        PostLike.objects.create(user=request.user, post=post)
+    Like.objects.create(user=request.user, post=post)
     return redirect('detail', slug=slug)

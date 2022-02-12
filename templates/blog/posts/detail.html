@@ -35,7 +35,7 @@
                         </div>
                     </li>
                     <li class="nav-item">{{ post.created|timesince }}</li>
-                    <li class="nav-item"><a href="{{ object.get_like_count }}" class="text-body"><i class="far fa-heart me-1"></i></a> {{ post.get_like_count }}</li>
+                    <li class="nav-item"><a href="{{ object.get_like_url }}" class="text-body"><i class="far fa-heart me-1"></i></a> {{ post.get_like_count }}</li>
                     <li class="nav-item">{{ post.get_view_count }} Views</li>
                 </ul>
             </div>
@@ -200,7 +200,7 @@
                     <!-- Comments END -->
 
                     <!-- Reply START -->
-                    {% if request.user.is_authenticated %}
+                    
                     <div>
                         <h3>Leave a reply</h3>
                         <form class="review-form" 
@@ -210,16 +210,15 @@
                                 <label for="exampleFormControlTextarea1" class="form-label">Leave a reply</label>
                                 <textarea class="form-control" name='content' id="exampleFormControlTextarea1" rows="3" placeholder="Your comment"></textarea>
                                 </div>
-                                {% if user.id is not None %}
+                                {% if request.user.is_authenticated %}
                                 <div class="d-grid gap-2">
                                 <button class="btn btn-primary btn-sm" type="submit">Post comment</button>
                                 </div> 
                                 {% else %}
-                                You must be logged in to post a review
+                                <a href='{% url "account_login" %}' class="btn btn-primary btn-sm">Login to comment</a>
                             {% endif %}
                         </form>
                     </div>
-                    {% endif %}
                     <!-- Reply END --> 
                     {% comment %} <div class="col-lg-2">
                         <div class="text-start text-lg-center mb-5" data-sticky data-margin-top="80" data-sticky-for="991">

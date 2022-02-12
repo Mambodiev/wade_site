@@ -2,7 +2,7 @@ from django.http import  HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import  render
 from django.shortcuts import get_object_or_404, render
-from .models import Video_category, Video
+from .models import Video_category, Video, VideoView
 from .forms import CommentForm, Comment
 
 
@@ -49,9 +49,12 @@ def video_detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
     all_videos = Video.objects.all()
 
+    if request.user.is_authenticated:
+        VideoView.objects.get_or_create(user=request.user, video=video)
     context = {
         'video': video,
         'all_videos': all_videos,
+        'VideoView': VideoView
         }
 
     return render(request, 'content/detail.html', context)

@@ -3,9 +3,19 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.forms import ModelForm
+from blog.models import Author
+from django.contrib.auth import get_user_model 
 
 
-# Create your models here.
+User = get_user_model()
+
+
+class VideoView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey('Video', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Video_category(models.Model):
@@ -30,7 +40,8 @@ class Video(models.Model):
     image = models.ImageField(upload_to='images/', default='images/default.png')
     slug = models.SlugField(unique=True)
     description = models.TextField()
-    comment_count=models.IntegerField(default=0)
+    # comment_count=models.IntegerField(default=0)
+    view_count=models.IntegerField(default=0)
     related_video = models.ForeignKey(
         'self', related_name='related', on_delete=models.SET_NULL, blank=True, null=True)
     order = models.IntegerField(default=1)
@@ -52,11 +63,15 @@ class Video(models.Model):
 
     @property
     def comment_count(self):
-        return Comment.objects.filter(video=self).count()
+        return Comment.objects.filter(video=self).count() 
 
     @property
     def get_view_count(self):
-            return self.videoview_set.all().count()
+        return self.videoview_set.all().count()
+
+    @property
+    def view_count(self):
+            return VideoView.objects.filter(video=self).count()
 
         
     @property
@@ -95,3 +110,5 @@ class VideoLike(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
