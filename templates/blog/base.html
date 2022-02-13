@@ -88,30 +88,30 @@
 				<div class="container">
 					<!-- Logo START -->
 					<a class="navbar-brand py-0"  href="{% url 'home' %}">
-						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">			
-						<img class="navbar-brand-item dark-mode-item" src="{% static  'images/logo-light.svg' %}" alt="logo">			
+						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">
+						{% comment %} <h3 class='fs-4'>Ouest.</h3>				 {% endcomment %}
 					</a>
 					<!-- Logo END -->
 
 					<!-- Responsive navbar toggler -->
 					<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="text-body h6 d-none d-sm-inline-block">Menu</span>
-						<span class="navbar-toggler-icon"></span>
+						<span class="navbar-toggler-icon fs-6"></span>
 					</button>
 
 					<!-- Main navbar START -->
 					<div class="collapse navbar-collapse" id="navbarCollapse">
 						<ul class="navbar-nav navbar-nav-scroll mx-auto">
 							<li class="nav-item">	
-								<a class="nav-link" href="{% url 'blog:post' %}">All</a>
+								<a class="nav-link text-dark" href="{% url 'blog:post' %}">All</a>
 							</li>
 							{% for c in categories %}
-								<li {% if category.slug == c.slug %}class="nav-item" {% endif %}>	
-									<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+								<li class="nav-item" {% if category.slug == c.slug %} {% endif %}>	
+									<a class="nav-link text-dark" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
 								</li>
 							{% endfor %}
 							<li class="nav-item">	
-								<a class="nav-link" href="{% url 'content:video' %}">Video</a>
+								<a class="nav-link text-dark" href="{% url 'content:video' %}">Video</a>
 							</li>
 						</ul>
 					</div>
@@ -124,7 +124,7 @@
 						<!-- Nav Search -->
 						<div class="nav-item dropdown dropdown-toggle-icon-none nav-search">
 							<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-search fs-5"> </i>
+								<i class="bi bi-search fs-6"> </i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
 							<form class="input-group">
@@ -138,7 +138,7 @@
 						<!-- LANGUAGE -->
 						<div class="nav-item ">
 						<a class="nav-link fw-bolder" href="#">
-								<h5 class='mb-0'>.FR</h5>
+								<p5 class='mb-0 text-secondary fs-6'>.FR</p5>
 							</a>
 						</div>
 						<!-- End LANGUAGE -->
@@ -146,7 +146,7 @@
 						<!-- Offcanvas menu toggler -->
 						<div class="nav-item">
 							<a class="nav-link p-0" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-								<i class="bi bi-text-right rtl-flip fs-2" data-bs-target="#offcanvasMenu"> </i>
+								<i class="bi bi-text-right rtl-flip fs-5" data-bs-target="#offcanvasMenu"> </i>
 							</a>
 						</div>
 					</div>

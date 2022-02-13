@@ -16,7 +16,8 @@
                     <div class="d-sm-flex align-items-center text-center text-sm-start">
                         <!-- Title -->
                         <div class="me-3">
-                            <span class="badge bg-primary p-2 px-3">Trending:</span>
+                            <span class="badge bg-white text-dark
+                            p-2 px-3">Trending:</span>
                         </div>
                         <!-- Slider -->
                         <div class="tiny-slider arrow-end arrow-xs arrow-white arrow-round arrow-md-none">
@@ -51,9 +52,7 @@
                 {% if post.is_left_big_card %}
                 <div class="col-lg-6">
                     <div class="card card-overlay-bottom card-grid-lg card-bg-scale" style="background-image:url({{ post.thumbnail.url }}); background-position: center left; background-size: cover;">
-                        <!-- Card featured -->
-                        <span class="card-featured" title="Featured post"><i class="fas fa-star"></i></span>
-                        <!-- Card Image overlay -->
+                        
                         <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
                             <div class="w-100 mt-auto">
                                 <!-- Card category -->
