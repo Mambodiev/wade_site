@@ -10,7 +10,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
-    image = models.ImageField(upload_to='images/', default='images/default.png')
+    image = models.ImageField(upload_to='media/', default='images/default.png')
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
@@ -30,7 +30,7 @@ class Category(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='images/', default='images/default.png')
+    profile_picture = models.ImageField(upload_to='media/', default='images/default.png')
     about_author = models.TextField(default='Wade est rédacteur en chef du blogzine et fait également des reportages sur les dernières nouvelles basées à Londres.')
 
 
@@ -46,7 +46,7 @@ class Post(models.Model):
         category_name = models.CharField(max_length=255)
         created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_creator')
         title = models.CharField(max_length=255)
-        thumbnail = models.ImageField(upload_to='images/', default='images/default.png')
+        thumbnail = models.ImageField(upload_to='media/', default='images/default.png')
         slug = models.SlugField(max_length=255, blank=True, null=True,)
         author = models.ForeignKey(Author, on_delete=models.CASCADE)
         about_author = models.CharField(max_length=255, default='Un éditeur chez Blogzine')

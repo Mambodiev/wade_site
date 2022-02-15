@@ -37,7 +37,7 @@ class Video(models.Model):
     video_category = models.ForeignKey(Video_category, related_name='video', on_delete=models.CASCADE)
     vimeo_id = models.CharField(max_length=50)
     title = models.CharField(max_length=150)
-    image = models.ImageField(upload_to='images/', default='images/default.png')
+    image = models.ImageField(upload_to='media/', default='images/default.png')
     slug = models.SlugField(unique=True)
     description = models.TextField()
     # comment_count=models.IntegerField(default=0)
@@ -96,12 +96,12 @@ class CommentForm(ModelForm):
         fields = ['content']
 
 
-class VideoView(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+# class VideoView(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     video = models.ForeignKey(Video, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 class VideoLike(models.Model):
