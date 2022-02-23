@@ -31,7 +31,7 @@ class Category(models.Model):
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='images/', default='images/default.png')
-    about_author = models.TextField(default='Wade est rédacteur en chef du blogzine et fait également des reportages sur les dernières nouvelles basées à Londres.')
+    about_author = models.TextField(blank=True, null=True)
 
 
     def __str__(self):

@@ -96,12 +96,12 @@ class CommentForm(ModelForm):
         fields = ['content']
 
 
-class VideoView(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+# class VideoView(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     video = models.ForeignKey(Video, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 class VideoLike(models.Model):
