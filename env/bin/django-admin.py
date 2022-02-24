@@ -1,4 +1,4 @@
-#!/home/diev/Projects/fiveer gigs/Wade work/blogzine_v1.0.2/env/bin/python3
+#!/home/diev/wade_site/env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
