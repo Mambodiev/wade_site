@@ -1,10 +1,14 @@
 import os
+import django_on_heroku
+import dj_database_url
+from decouple import config
 import environ
 from pathlib import Path
 
 env = environ.Env()
 # read the .env file
 environ.Env.read_env()
+ALLOWED_HOSTS = []
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -151,3 +155,6 @@ AUTHENTICATION_BACKENDS = [
 
 
 SITE_ID = 1
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_on_heroku.settings(locals())
