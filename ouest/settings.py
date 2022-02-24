@@ -8,7 +8,7 @@ from pathlib import Path
 # env = environ.Env()
 # read the .env file
 # environ.Env.read_env()
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "www.ouestsenegal.herokuapp.com"]
+ALLOWED_HOSTS = ["ouestsenegal.herokuapp.com", '127.0.0.1']
 SECRET_KEY = config('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -119,9 +119,9 @@ USE_TZ = True
 STATIC_URL='/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "project/static/")
+    os.path.join(BASE_DIR, "static/")
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
