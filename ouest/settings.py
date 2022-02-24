@@ -1,15 +1,15 @@
-import os
+# import os
 import django_on_heroku
 import dj_database_url
 from decouple import config
-import environ
+# import environ
 from pathlib import Path
 
-env = environ.Env()
+# env = environ.Env()
 # read the .env file
-environ.Env.read_env()
+# environ.Env.read_env()
 ALLOWED_HOSTS = []
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
