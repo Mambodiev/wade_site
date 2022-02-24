@@ -8,7 +8,7 @@ from pathlib import Path
 # env = environ.Env()
 # read the .env file
 # environ.Env.read_env()
-ALLOWED_HOSTS = ["127.0.1.1", "localhost", "www.ouestsenegal.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.1.1", "localhost", ".ouestsenegal.herokuapp.com"]
 SECRET_KEY = config('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
