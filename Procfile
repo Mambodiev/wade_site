@@ -1,1 +1,1 @@
-web: gunicorn wsgi:ouest
+web: gunicorn ouest.wsgi
