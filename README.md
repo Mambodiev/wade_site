@@ -63,3 +63,4 @@ If you stuck with any issues or need help/have queries, Please read our document
 
 
 python3 manage.py runserver --settings ouest.settings.dev
+heroku logs --tail
