@@ -9,7 +9,7 @@ from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
     path('core/', include('core.urls', namespace='core')),
     path('', include('blog.urls', namespace='blog')),
     path('content/', include('content.urls', namespace='content')),

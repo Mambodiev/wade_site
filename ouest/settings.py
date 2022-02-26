@@ -10,8 +10,9 @@ from pathlib import Path
 # environ.Env.read_env()
 ALLOWED_HOSTS = ["ouestsenegal.herokuapp.com", '127.0.0.1']
 SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
@@ -126,8 +127,8 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

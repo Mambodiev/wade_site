@@ -50,7 +50,7 @@
 				<!-- Nav START -->
 				<ul class="nav d-block flex-column my-4">
 					<li class="nav-item">
-						<a href="{% url 'home' %}" class="nav-link h5">Home</a>
+						<a href="{% url 'blog:home' %}" class="nav-link h5">Home</a>
 					<li class="nav-item">
 						<a class="nav-link h5" href="{% url 'core:about' %}">About</a>
 					</li>
@@ -87,7 +87,7 @@
 			<nav class="navbar navbar-expand-lg" id='navbarheight'>
 				<div class="container">
 					<!-- Logo START -->
-					<a class="navbar-brand py-0"  href="{% url 'home' %}">
+					<a class="navbar-brand py-0"  href="{% url 'blog:home' %}">
 						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">			
 						<img class="navbar-brand-item dark-mode-item" src="{% static  'images/logo-light.svg' %}" alt="logo">			
 					</a>
