@@ -7,7 +7,7 @@ from pathlib import Path
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG=False
+DEBUG = False
 
 # Allowed host for production
 ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com', 'localhost', '127.0.0.1']

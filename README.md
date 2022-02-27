@@ -1,5 +1,5 @@
 TO RUN THIS PROJECT
-
+<!--  False -->
 source env/bin/activate
 python3 manage.py runserver
 
