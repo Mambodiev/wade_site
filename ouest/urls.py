@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from blog import views
+from blog.views import *
 
 
 urlpatterns = [
@@ -15,9 +15,8 @@ urlpatterns = [
     path('content/', include('content.urls', namespace='content')),
     path('_ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
-
-
 ]
+
 
 
 if settings.DEBUG:

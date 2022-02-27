@@ -11,6 +11,6 @@ python3 manage.py runserver --settings ouest.settings.dev
 heroku logs --tail
 python manage.py collectstatic
 git add .
-git commit -m "master"
+git commit -a -m 'touch 404 pages'
 git push -u origin master
 git push heroku master

@@ -5,14 +5,16 @@ from decouple import config
 # import environ
 from pathlib import Path
 
-# env = environ.Env()
-# read the .env file
-# environ.Env.read_env()
-ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = ['*']
 SECRET_KEY = config('SECRET_KEY')
-DEBUG=True
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+DEBUG=False
+
+# Allowed host for production
+ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com', 'localhost', '127.0.0.1']
+
+# Allowed host for developement
+# ALLOWED_HOSTS = ['*']
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [

@@ -14,7 +14,12 @@ urlpatterns = [
     path('<slug:slug>', views.post_detail, name='post_detail'),
     path('<slug:category_slug>/', views.category_list, name='category_list'),
     path('like/<slug>/', like, name='like'),
+    
 ]
+
+handler404 = "blog.views.page_not_found_view"
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

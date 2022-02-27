@@ -85,3 +85,7 @@ def like(request, slug):
         return redirect('detail', slug=slug)
     Like.objects.create(user=request.user, post=post)
     return redirect('detail', slug=slug)
+
+
+def page_not_found_view(request, exception):
+    return render(request, 'blog/not-found.html')
