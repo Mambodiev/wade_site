@@ -10,7 +10,9 @@ wade
 python3 manage.py runserver --settings ouest.settings.dev
 heroku logs --tail
 python manage.py collectstatic
+
 git add .
-git commit -a -m 'touch 404 pages'
+git commit -m "touch authentication"
 git push -u origin master
+
 git push heroku master
