@@ -1,17 +1,19 @@
 import os
 import django_on_heroku
 import dj_database_url
-from decouple import config
 from pathlib import Path
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True
+DEBUG = str(os.environ.get('DEBUG')) == '1'
 
 # Allowed host for production
-ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
+# ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
 # Allowed host for developement
-# ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com/', '127.0.0.1']
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -59,7 +61,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +77,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ouest.wsgi.application'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('POSTGRES_NAME'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+            'HOST': os.environ.get('POSTGRES_HOST'),
+            'PORT': os.environ.get('POSTGRES_PORT'),
     }
 }
 
@@ -101,14 +107,14 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL='/static/'
-STATIC_ROOT = BASE_DIR / 'wade_site/staticfiles'
+MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/media/'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -126,5 +132,9 @@ CKEDITOR_CONFIGS = {
 }
 
 SITE_ID = 1
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# django_on_heroku.settings(locals())
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_QUERYSTRING_AUTH = False

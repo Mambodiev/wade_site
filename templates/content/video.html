@@ -1,92 +1,87 @@
 
 {% extends "blog/base.html" %}
 {% load static %}
-{% load blog_tags %}
+{% load content_tags %}
 
 {% block content %}
-<!-- **************** MAIN CONTENT START **************** -->
-    <main>
-        <!-- =======================
-        Inner intro START -->
-        <section class="pb-4 pt-3">
-            <div class="container">
-                <div class="row">
-            <div class="col-12">
-                <div class="card bg-dark-overlay-3 h-300 overflow-hidden card-bg-scale text-center" style="background-image:url({% static  'images/07.jpg' %}); background-position: center left; background-size: cover;">
-                <!-- Card Image overlay -->
-                <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
-                    <div class="col-md-8 m-auto bg-blur p-5 rounded-3 shadow-lg">
-                                    <h1 class="text-white">Videos</h1>
-                                    <nav class="d-flex justify-content-center" aria-label="breadcrumb">
-                                <ol class="breadcrumb breadcrumb-dark breadcrumb-dots mb-0">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house me-1"></i> Home</a></li>
-                                    <li class="breadcrumb-item active">Tous</li>
-                                </ol>
-                            </nav>
-                    </div>
-                </div>
-                </div>
+
+
+<div class="row card-grid my-3">
+   {% include 'content/content/videocategories.html' %}
+   <div class="col-lg-4 mt-0">
+      <div class="row">
+        {% for video in latest_videos %}
+         <div class="col-md-6">
+            <div class="card card-overlay-bottom card-grid-sm card-fold rounded-0" style="background-image:url({{ video.image.url }}); background-position: center left; background-size: cover;">
+               <div class="position-absolute top-50 start-50 translate-middle pb-5">
+                  <a href="{{ video.get_absolute_url }}" class="icon-lg bg-primary d-block text-white rounded-circle" >
+                     <i class="bi bi-play-btn"></i>
+                  </a>
+               </div>
+               <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+                  <div class="w-100 mt-auto">
+                     <h4 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link stretched-link text-reset">{{ video.title }}</a></h4>
+                  </div>
+               </div>
             </div>
-            </div>
-            </div>
-        </section>
-        <!-- =======================
-        Inner intro END -->
-        <!-- =======================
-        Main content START -->
-        <section class="position-relative pt-0">
-            <div class="container">
-                <div class="row g-4">
-            <!-- Card item START -->
-            {% for video in all_videos %}
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card card-overlay-bottom card-img-scale">
-                        <img src="{{ video.image.url }}" alt="">
-                        <div class="card-img-overlay d-flex flex-column p-3 p-md-4"> 
-                            <div class="w-100 mt-auto">
-                                <h5 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset stretched-link">{{ video.title }}</a></h5>
-                            </div>
+         </div>
+         <!-- Card item END -->
+         {% endfor %}
+      </div>
+   </div>
+</div>
+
+{% for ct in all_categs %}
+<section class="pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+					<h2 class="">{{ct.name}}</h2>
+				<div class="tiny-slider arrow-hover arrow-blur arrow-dark arrow-round">
+					<div class="tiny-slider-inner"
+						data-autoplay="true"
+						data-hoverpause="true"
+						data-gutter="24"
+						data-arrow="true"
+						data-dots="false"
+						data-items-xl="4" 
+						data-items-md="3" 
+						data-items-sm="2" 
+						data-items-xs="1">
+                  {% for video in ct.videocat.all %}
+						<div class="card">
+							<div class="position-relative">
+								<img class="card-img" src="{{ video.image.url }}" alt="Card image">
+								<div class="card-img-overlay d-flex align-items-start flex-column p-3">
+									<div class="w-100 mb-auto d-flex justify-content-end">
+										<div class="text-end ms-auto">
+											<div class="icon-md bg-white-soft bg-blur text-white fw-bold rounded-circle" title="8.5 rating">LOGO</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="card-body px-0 pt-3">
+								<h5 class="card-title"><a href="post-single-3.html" class="btn-link text-reset fw-bold">{{video.title}}</a></h5>
+                        <div class="d-flex justify-content-between">
+                           <p class="">
+                              <i class="bi bi-eye"></i>  633.8k
+                            </p>
+                            <p class="">
+                              <i class="bi bi-heart"></i>  1.8k
+                            </p>
+                            <p class="">
+                              <i class="bi bi-chat-left"></i>  26
+                            </p>
                         </div>
-                    </div>
-                </div>
-            {% endfor %}
-            <!-- Card item END -->
-            </div> 
-            <!-- Row end -->
-        
-                <!-- Pagination START -->
-            <nav class="my-5" aria-label="navigation">
-            <ul class="pagination pagination-bordered d-flex justify-content-between">
-                <li>
-                    <ul class="list-unstyled">
-                        <li class="page-item">
-                            <a class="page-link" href="#">First</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="list-unstyled">
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-                        <li class="page-item"><a class="page-link" href="#">22</a></li>
-                        <li class="page-item"><a class="page-link" href="#">23</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="list-unstyled">
-                        <li class="page-item">
-                            <a class="page-link" href="#">Last</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            </nav>
-                <!-- Pagination END -->
-            </div>
-        </section>
-        <!-- =======================
-        Main content END -->
-    </main>
-<!-- **************** MAIN CONTENT END **************** -->
+							</div>
+						</div> 
+                  {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
 {% endblock %}

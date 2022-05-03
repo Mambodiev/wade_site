@@ -51,7 +51,7 @@
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: Rubik, sans-serif;
+  --bs-body-font-family: 'Merriweather', serif;
   --bs-body-font-size: 0.9375rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -74,7 +74,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: 'Merriweather', serif;
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -100,7 +100,7 @@ hr:not([size]) {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Merriweather', serif;
   font-weight: 700;
   line-height: 1.25;
   color: #191a1f;
@@ -249,7 +249,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: var(--bs-font-monospace);
+  font-family: 'Merriweather', serif;
   font-size: 1em;
   direction: ltr /* rtl:ignore */;
   unicode-bidi: bidi-override;
@@ -6387,7 +6387,7 @@ textarea.form-control-lg {
   z-index: 1080;
   display: block;
   margin: 0;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Merriweather', serif;
   font-style: normal;
   font-weight: 500;
   line-height: 1.5;
@@ -6489,7 +6489,7 @@ textarea.form-control-lg {
   z-index: 1070;
   display: block;
   max-width: 276px;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Merriweather', serif;
   font-style: normal;
   font-weight: 500;
   line-height: 1.5;
@@ -8519,7 +8519,7 @@ textarea.form-control-lg {
 }
 
 .font-monospace {
-  font-family: var(--bs-font-monospace) !important;
+  font-family: 'Merriweather', serif; !important;
 }
 
 .fs-1 {
@@ -14101,7 +14101,7 @@ textarea.form-control-lg {
 
 .dropdown-toggle:after {
   content: "";
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Merriweather', serif;
   font-size: 0.5rem;
   margin-left: 0.35rem;
   font-weight: 900;
@@ -14111,7 +14111,7 @@ textarea.form-control-lg {
 
 .dropup .dropdown-toggle:after {
   content: "";
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Merriweather', serif;
   font-size: 0.5rem;
   margin-left: 0.35rem;
   font-weight: 900;
@@ -14534,7 +14534,7 @@ header .navbar-nav .nav-link.active:before {
 
 .navbar .dropdown-menu .dropdown-submenu.dropend .dropdown-toggle:after {
   content: "";
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Merriweather', serif;
   font-size: 10px;
   top: 10px;
   -webkit-transform: rotate(45deg);
@@ -14558,7 +14558,7 @@ header .navbar-nav .nav-link.active:before {
 
 .navbar .dropdown-menu .dropdown-submenu.dropstart .dropdown-toggle:before {
   content: "";
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Merriweather', serif;
   font-size: 10px;
   top: 8px;
   -webkit-transform: rotate(45deg);
@@ -15499,7 +15499,7 @@ html[data-theme=dark] .light-mode-item {
 }
 .modeswitch .switch:before {
   content: "";
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Merriweather', serif;
   font-weight: 900;
   border: none;
   height: 26px;
@@ -16074,11 +16074,11 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
 }
 
 .font-base {
-  font-family: "Rubik", sans-serif !important;
+  font-family: 'Merriweather', serif !important;
 }
 
 .font-heading {
-  font-family: "Nunito Sans", sans-serif !important;
+  font-family: 'Merriweather', serif !important;
 }
 
 .grayscale {
@@ -16167,4 +16167,27 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
  left: 0; 
  width: 100%; 
  height: 100%; 
+}
+
+.arrow-hover [data-controls=next] {
+  right: -75px;
+}
+
+.arrow-hover [data-controls=prev] {
+  left: -75px;
+
+  /* lang selector */
+}.selectpicker {
+  font-size: 0.9375rem;
+  border: 0px solid #939393; 
+  border-radius: 50px;
+  color: #595d69;
+}
+.selectpicker, input:focus{
+  outline: none!important;
+  list-style:none!important;
+  background: white; 
+}
+.selectpicker:hover {
+  border: 0px solid #92a8d1;
 }

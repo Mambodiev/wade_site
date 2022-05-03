@@ -2,9 +2,9 @@ from django.http import  HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import  render
 from django.shortcuts import get_object_or_404, render
-from .models import Video_category, Video, VideoView
+from .models import Videocategory, Video, VideoView
 from .forms import CommentForm, Comment
-
+from django.views.generic import ListView
 
 def addcomment(request, id):
     url = request.META.get('HTTP_REFERER')  # get last url
@@ -27,20 +27,32 @@ def addcomment(request, id):
 
 def categories(request):
     return {
-        'categories': Video_category.objects.all()
+        'categories': Videocategory.objects.all()
     }
 
+class HomeView(ListView):
+    template_name = 'content/video.html'
+    model = Videocategory
+    context_object_name = 'all_categs'
 
-def video(request):
-    all_videos = Video.objects.all()
-    context = {
-        'all_videos': all_videos,
-        }
-    return render(request, 'content/video.html', context)
+    def get_queryset(self):
+       return Videocategory.objects.all()
+
+    def get_context_data(self):
+        context = super(HomeView, self).get_context_data()
+        context['latest_videos'] = Video.objects.order_by('-date_posted')[0:3] 
+        return context
+
+# def video(request):
+#     all_videos = Video.objects.all()
+#     context = {
+#         'all_videos': all_videos,
+#         }
+#     return render(request, 'content/video.html', context)
 
 
 def category_list(request, category_slug=None):
-    category = get_object_or_404(Video_category, slug=category_slug)
+    category = get_object_or_404(Videocategory, slug=category_slug)
     videos = Video.objects.filter(category=category)
     return render(request, 'content/list.html', {'category': category, 'videos': videos})
 

@@ -1,0 +1,34 @@
+
+      {% for video in recent_videos %}
+      {% if video.is_featured %}
+
+      <div class="row justify-content-start">
+         <p class="fs-1">Vidéos À la une,</p>
+         <div class="col-lg-4">
+         <h1 class="fs-1"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset fw-normal">{{ video.title }}</a></h1>
+         <p class="mb-0">{{ video.description|slice:":125" }} ...</p>
+         </div>
+      </div>
+      <div class="col-lg-4 mt-0">
+         <div class="card card-overlay-bottom card-grid-lg card-fold rounded-0" style="background-image:url({{ video.image.url }}); background-position: center left; background-size: cover;">
+            <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+               <div class="w-100 my-auto">
+                  <a href="{{ video.get_absolute_url }}" class="icon-md bg-primary d-block mx-auto text-white rounded-circle" >
+                     <i class="bi bi-play-btn"></i>
+                  </a>
+               </div>
+            </div>
+            <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+               <div class="w-100 mt-auto">
+                  <h1 class="text-white display-5"><a href="{{ video.get_absolute_url }}" class="btn-link stretched-link text-reset fw-normal">{{ video.title }}</a></h1>
+                  <p class="text-white mb-0">{{ video.description|slice:":85" }} ...</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      
+
+
+ 
