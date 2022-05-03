@@ -9,7 +9,7 @@
   "python.linting.pycodestyleArgs": ["--ignore=E501"],
   "files.exclude": {
     "**/*.pyc": true,
-    "env": true
+   "env": true
   },
   "python.linting.enabled": false,
   "workbench.editorAssociations": {},

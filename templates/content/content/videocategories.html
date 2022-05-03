@@ -1,0 +1,45 @@
+{% load static %}
+{% load content_tags %}
+
+
+{% for c in videocategories %}
+<main>
+    <section {% if videocategory.slug == c.slug %} {% endif %} class="position-relative pt-0">
+        <div class="container">
+            <div class="row">
+                <!-- Card item START -->
+                <div class="d-md-flex justify-content-between align-items-center">
+                    <h2 class="m-0 bg-success p-2">{{ c.name|title }}</h2>
+                </div>
+                <div class="tiny-slider arrow-hover arrow-blur arrow-dark arrow-round mt-3">
+                    <div class="tiny-slider-inner"
+                        data-autoplay="true"
+                        data-hoverpause="true"
+                        data-gutter="24"
+                        data-arrow="true"
+                        data-dots="false"
+                        data-items-xl="4"
+                        data-items-lg="3" 
+                        data-items-md="3" 
+                        data-items-sm="2" 
+                        data-items-xs="1">
+                        {% comment %} <div class="card">
+                            <!-- Card img -->
+                            <div class="position-relative">
+                                <img class="card-img" src="{{ video.image.url }}" alt="Card image">
+                            </div>
+                            <div class="card-body px-0 pt-3">
+                                <p class="card-title"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset fw-bold">{{ c.name }}</a></p>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+    <!-- =======================
+    Main content END -->
+</main>
+{% endfor %}
+
+{% show_recent_videos %}

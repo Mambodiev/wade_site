@@ -1,1 +1,1 @@
-web: gunicorn ouest.wsgi
+web: gunicorn ouest.wsgi --log-file -
