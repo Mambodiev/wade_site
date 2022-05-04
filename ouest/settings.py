@@ -9,7 +9,7 @@ DEBUG = str(os.environ.get('DEBUG')) == '1'
 # ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
 # Allowed host for developement
 
-ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['.ouestsenegal.herokuapp.com', '127.0.0.1']
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
 
