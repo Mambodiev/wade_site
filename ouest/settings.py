@@ -1,6 +1,4 @@
 import os
-import django_on_heroku
-import dj_database_url
 from pathlib import Path
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
