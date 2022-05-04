@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-DEBUG = str(os.environ.get('DEBUG')) == '1'
+DEBUG = True
+# DEBUG = str(os.environ.get('DEBUG')) == '1'
 
 # Allowed host for production
 # ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
