@@ -1,10 +1,11 @@
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 from pathlib import Path
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
-DEBUG = str(os.environ.get('DEBUG')) == '1'
+DEBUG = str(os.getenv('DEBUG')) == '1'
 
 # Allowed host for production
 # ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
@@ -12,7 +13,7 @@ DEBUG = str(os.environ.get('DEBUG')) == '1'
 
 ALLOWED_HOSTS = ['.ouestsenegal.herokuapp.com', '127.0.0.1']
 if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
+    ALLOWED_HOSTS += [str(os.getenv('ALLOWED_HOST'))]
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,11 +78,11 @@ WSGI_APPLICATION = 'ouest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('POSTGRES_NAME'),
-            'USER': os.environ.get('POSTGRES_USER'),
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-            'HOST': os.environ.get('POSTGRES_HOST'),
-            'PORT': os.environ.get('POSTGRES_PORT'),
+            'NAME': str(os.getenv('POSTGRES_NAME')),
+            'USER': str(os.getenv('POSTGRES_USER')),
+            'PASSWORD': str(os.getenv('POSTGRES_PASSWORD')),
+            'HOST': str(os.getenv('POSTGRES_HOST')),
+            'PORT': str(os.getenv('POSTGRES_PORT')),
     }
 }
 
@@ -139,7 +140,7 @@ CKEDITOR_CONFIGS = {
 SITE_ID = 1
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = str(os.getenv('AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = str(os.getenv('AWS_SECRET_ACCESS_KEY'))
+AWS_STORAGE_BUCKET_NAME = str(os.getenv('AWS_STORAGE_BUCKET_NAME'))
 AWS_QUERYSTRING_AUTH = False
