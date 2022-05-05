@@ -2,6 +2,7 @@ import os
 import environ
 env = environ.Env()
 environ.Env.read_env()
+
 from pathlib import Path
 
 SECRET_KEY = env('SECRET_KEY')
@@ -85,6 +86,10 @@ DATABASES = {
             'PASSWORD': env('POSTGRES_PASSWORD'),
             'HOST': env('POSTGRES_HOST'),
             'PORT': env('POSTGRES_PORT'),
+            'keepalives':1,
+            'keepalives_idle':130,
+            'keepalives_interval':10,
+            'keepalives_count':15
     }
 }
 
