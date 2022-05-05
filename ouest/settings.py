@@ -7,7 +7,7 @@ from pathlib import Path
 SECRET_KEY = env('SECRET_KEY')
 
 
-DEBUG = env('DEBUG') == '1'
+DEBUG = env('DEBUG')
 
 # Allowed host for production
 ALLOWED_HOSTS = []
