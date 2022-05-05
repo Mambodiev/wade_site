@@ -5,7 +5,9 @@ from pathlib import Path
 
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
-DEBUG = str(os.getenv('DEBUG')) == '1'
+DEBUG = True
+
+# DEBUG = str(os.getenv('DEBUG')) == '1'
 
 # Allowed host for production
 # ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
