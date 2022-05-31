@@ -10,9 +10,9 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 
-DEBUG=env('DEBUG')
+DEBUG = env('DEBUG')
 # Allowed host for production
-ALLOWED_HOSTS= ['127.0.0.1']
+ALLOWED_HOSTS= ['ouestsenegal.herokuapp.com', '127.0.0.1']
 # Allowed host for developement
 
 # ALLOWED_HOSTS = ['.ouestsenegal.herokuapp.com']
