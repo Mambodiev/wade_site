@@ -10,7 +10,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='media/',  blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
@@ -30,7 +30,7 @@ class Category(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='media/')
+    profile_picture = models.ImageField(upload_to='media/', blank=True, null=True)
     about_author = models.TextField(blank=True, null=True)
 
 

@@ -1,19 +1,23 @@
+
 import os
-import django_on_heroku
-import dj_database_url
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 from pathlib import Path
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = str(os.environ.get('DEBUG')) == '1'
 
+
+DEBUG=env('DEBUG')
 # Allowed host for production
-# ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com']
+ALLOWED_HOSTS= ['127.0.0.1']
 # Allowed host for developement
 
-ALLOWED_HOSTS = ['ouestsenegal.herokuapp.com/', '127.0.0.1']
-if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
+# ALLOWED_HOSTS = ['.ouestsenegal.herokuapp.com']
+# if not DEBUG:
+#     ALLOWED_HOSTS += env('ALLOWED_HOSTS')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +36,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'ckeditor',
     'ckeditor_uploader',
+    'storages',
 
     'blog',
     'core',
@@ -78,13 +83,23 @@ WSGI_APPLICATION = 'ouest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('POSTGRES_NAME'),
-            'USER': os.environ.get('POSTGRES_USER'),
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-            'HOST': os.environ.get('POSTGRES_HOST'),
-            'PORT': os.environ.get('POSTGRES_PORT'),
+            'NAME': env('POSTGRES_NAME'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('POSTGRES_HOST'),
+            'PORT': env('POSTGRES_PORT'),
+            'keepalives':1,
+            'keepalives_idle':130,
+            'keepalives_interval':10,
+            'keepalives_count':15
     }
 }
+
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -116,6 +131,7 @@ STATICFILES_DIRS = [
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
@@ -131,10 +147,20 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-SITE_ID = 1
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+SITE_ID=1
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_QUERYSTRING_AUTH = False
+
+AWS_S3_ACCESS_KEY_ID=env('AWS_S3_ACCESS_KEY_ID')
+AWS_S3_SECRET_ACCESS_KEY=env('AWS_S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME=env('AWS_STORAGE_BUCKET_NAME')
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+
+DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
+
+
