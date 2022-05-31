@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+          <div class="p-4 p-sm-5 bg-primary-soft rounded">
+            <h2 class="text-center">{% trans "Sign Out" %}</h2>
+              <p class="text-sm text-center">{% trans 'Are you sure you want to sign out?' %}</p>
+            <form class="mt-4 login" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %}
+              <div class="mb-3 text-center">
+                <form method="post" action="{% url 'account_logout' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                  {% endif %}
+                  <button type="submit" class="btn btn-success ">{% trans 'Sign Out' %}</button>
+                </form>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

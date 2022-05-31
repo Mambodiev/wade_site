@@ -3,23 +3,14 @@
 <html lang="en">
 <head>
 	<title>{% block title %}Blogzine - Blog and Magazine Bootstrap 5 Theme{% endblock %}</title>
-
-	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="Webestica.com">
 	<meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
-
-	<!-- Favicon -->
 	<link rel="icon" href="{% static 'images/favicon.ico' %}">
-	
-
-	<!-- Google Font -->
-	{% comment %} <link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet"> {% endcomment %}
-
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<<<<<<< HEAD
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 	
 
@@ -30,11 +21,17 @@
 
 	<!-- Theme CSS -->
 	{% comment %} <link id="style-switch" rel="stylesheet" type="text/css" href="{% static  'css/style.css' %}"> {% endcomment %}
+=======
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/font-awesome/css/all.min.css' %}" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static  '/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static  '/vendor/tiny-slider/tiny-slider.css' %}">
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-	
 </head>
 
 <body>
+<<<<<<< HEAD
 	
 	<!-- Offcanvas START -->
 	{% comment %} <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
@@ -81,11 +78,13 @@
 	<!-- Offcanvas END -->
 	<!-- =======================
 	Header START -->
+=======
+
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 	<header class="navbar-light navbar-sticky header-static">
-		<!-- Logo Nav START -->
-		<div class='col-lg-9 mx-auto'>
-			<nav class="navbar navbar-expand-lg" id='navbarheight'>
+			<nav class="navbar navbar-expand-lg">
 				<div class="container">
+<<<<<<< HEAD
 					<!-- Logo START -->
 					<a class="navbar-brand py-0"  href="{% url 'home' %}">
 						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo.svg' %}" alt="logo">
@@ -108,19 +107,32 @@
 							{% endfor %}
 							<li class="nav-item">	
 								<a class="nav-link text-dark" href="{% url 'content:video' %}">Video</a>
+=======
+					<a class="navbar-brand"  href="{% url 'blog:home' %}">
+						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo1.png' %}" alt="logo">				
+					</a>
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav navbar-nav-scroll mx-auto">
+							<li class="nav-item">	
+								<a class="nav-link" href="{% url 'content:video' %}">Vidéo</a>
 							</li>
+							{% for c in categories %}
+							<li class="nav-item" {% if category.slug == c.slug %}{% endif %}>	
+								<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+							</li>
+							{% endfor %}
 						</ul>
 					</div>
-					<!-- Main navbar END -->
-
-					<!-- Nav right START -->
 					<div class="nav flex-nowrap align-items-center">
-						<!-- Nav Button -->
-
-						<!-- Nav Search -->
 						<div class="nav-item dropdown dropdown-toggle-icon-none nav-search">
+<<<<<<< HEAD
 							<a class="nav-link dropdown-toggle p-0" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-search"> </i>
+=======
+							<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-search fs-6"> </i>
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 							</a>
 							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
 							<form class="input-group">
@@ -129,8 +141,8 @@
 							</form>
 							</div>
 						</div>
-						<!-- End Nav Search -->
 
+<<<<<<< HEAD
 						<!-- LANGUAGE -->
 						<div class="nav-item ">
 						<a class="nav-link fw-bolder p-0" href="#">
@@ -149,17 +161,37 @@
 						<span class="navbar-toggler-icon fs-6"></span>
 					</button>
 						
+=======
+						<div class="nav-item">
+							<form action="/" method="post" class="language">
+								<input class="form-control"  name="next" type="hidden" value="" />
+								<select name="language" class="selectpicker  mr-2">
+										<option value=".FR" selected="selected">
+										<h5>.FR</h5>
+										<option value=".EN" selected="selected">
+											<h5>.EN</h5>
+										</option>
+										<option value=".ES" selected="selected">
+											<h5>.ES</h5>
+										</option>
+										
+								</select>
+							</form>
+						</div>
+						
+						<!-- Offcanvas menu toggler -->
+						<div class="nav-item">
+							<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="text-body h6 d-none d-sm-inline-block">Menu</span>
+								<i class="bi bi-text-right rtl-flip fs-2" > </i>
+							</button>
+						</div>
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 					</div>
-					<!-- Nav right END -->
 				</div>
 			</nav>
-		</div>
-		<!-- Logo Nav END -->
+		
 	</header>
-
-	<!-- =======================
-	Header END -->
-	<div class='col-lg-9 mx-auto' id="content">
 		{% if messages %}
 		{% for message in messages %}
 		<div class="container">
@@ -170,12 +202,11 @@
 		</div>
 		{% endfor %}
 	  {% endif %}
+	  <div class="container">
 		{% block content %} 
 		{% endblock %}
 	</div>
-
 	{% include 'blog/footer.html' %}	
-
 	{% include 'blog/script.html' %}
 </body>
 </html>

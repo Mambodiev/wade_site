@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<section>
+	<div class="container">
+		<div class="row">
+      <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div class="p-4 p-sm-5 bg-primary-soft rounded">
+					<h2 class='text-center'>Create your free account</h2>
+					<!-- Form START -->
+          <div class="text-sm text-center">
+            <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>          
+          </div>
+					<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+						<!-- Email -->
+            
+						<div class="mb-3">
+							{{ form.as_p }}
+              {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+						</div>
+              
+							<div class="text-center">
+								<button type="submit" class="btn btn-success">Sign Up</button>
+							</div>
+					</form>
+					<hr>
+					<!-- Social-media btn -->
+					<div class="text-center">
+						<p>Sign in with your social network for quick access</p>
+						<ul class="list-unstyled d-sm-flex mt-3 justify-content-center">
+							<li class="mx-2">
+								<a href="#" class="btn bg-facebook d-inline-block"><i class="fab fa-facebook-f me-2"></i> Sign in with Facebook</a>
+							</li>
+							<li class="mx-2">
+								<a href="#" class="btn bg-google d-inline-block"><i class="fab fa-google me-2"></i> Sign in with google</a>
+							</li>
+						</ul>
+					</div>
+        </div>
+      </div>
+    </div>
+	</div>
+</section>
+{% endblock %}

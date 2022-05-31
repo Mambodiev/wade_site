@@ -3,7 +3,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.forms import ModelForm
-from blog.models import Author
+from django.utils import timezone
 from django.contrib.auth import get_user_model 
 
 
@@ -18,12 +18,12 @@ class VideoView(models.Model):
         return self.user.username
 
 
-class Video_category(models.Model):
+class Videocategory(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
-        verbose_name_plural = 'Video_categories'
+        verbose_name_plural = 'Videocategories'
     
     def get_absolute_url(self):
         return reverse('content:course-list', args=[self.slug])
@@ -34,14 +34,21 @@ class Video_category(models.Model):
 
 
 class Video(models.Model):
-    video_category = models.ForeignKey(Video_category, related_name='video', on_delete=models.CASCADE)
+    videocategory = models.ForeignKey(Videocategory, related_name='videocat', on_delete=models.CASCADE)
     vimeo_id = models.CharField(max_length=50)
     title = models.CharField(max_length=150)
+<<<<<<< HEAD
     image = models.ImageField(upload_to='media/', default='images/default.png')
+=======
+    image = models.ImageField(upload_to='media/')
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
     slug = models.SlugField(unique=True)
     description = models.TextField()
+    is_featured = models.BooleanField(default=False)
     # comment_count=models.IntegerField(default=0)
     view_count=models.IntegerField(default=0)
+    date_posted = models.DateTimeField(default=timezone.now)
+
     related_video = models.ForeignKey(
         'self', related_name='related', on_delete=models.SET_NULL, blank=True, null=True)
     order = models.IntegerField(default=1)

@@ -49,3 +49,4 @@ class BlogSignupView(LoginView):
         return context
 
 
+

@@ -10,7 +10,11 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
+<<<<<<< HEAD
     image = models.ImageField(upload_to='media/', default='images/default.png')
+=======
+    image = models.ImageField(upload_to='media/',  blank=True, null=True)
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
@@ -30,8 +34,13 @@ class Category(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+<<<<<<< HEAD
     profile_picture = models.ImageField(upload_to='media/', default='images/default.png')
     about_author = models.TextField(default='Wade est rédacteur en chef du blogzine et fait également des reportages sur les dernières nouvelles basées à Londres.')
+=======
+    profile_picture = models.ImageField(upload_to='media/', blank=True, null=True)
+    about_author = models.TextField(blank=True, null=True)
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 
 
     def __str__(self):
@@ -46,16 +55,20 @@ class Post(models.Model):
         category_name = models.CharField(max_length=255)
         created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_creator')
         title = models.CharField(max_length=255)
+<<<<<<< HEAD
         thumbnail = models.ImageField(upload_to='media/', default='images/default.png')
+=======
+        thumbnail = models.ImageField(upload_to='media/')
+>>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
         slug = models.SlugField(max_length=255, blank=True, null=True,)
         author = models.ForeignKey(Author, on_delete=models.CASCADE)
-        about_author = models.CharField(max_length=255, default='Un éditeur chez Blogzine')
+        about_author = models.CharField(max_length=255)
         description = RichTextUploadingField(blank=True, null=True)
         overview = models.CharField(max_length=255)
         comment_count=models.IntegerField(default=0)
         created = models.DateTimeField(auto_now_add=True)
         updated = models.DateTimeField(auto_now=True)
-        time_read = models.CharField(max_length=255, default='5 min read')
+        time_read = models.CharField(max_length=255)
         is_left_big_card = models.BooleanField(default=False)
         is_right_medium_cards = models.BooleanField(default=False)
         is_right_left_small_cards = models.BooleanField(default=False)

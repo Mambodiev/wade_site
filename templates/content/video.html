@@ -1,55 +1,87 @@
 
 {% extends "blog/base.html" %}
 {% load static %}
-{% load blog_tags %}
+{% load content_tags %}
 
 {% block content %}
-    <!-- =======================
-    Section START -->
-    <section class="pt-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Title -->
-                    <div class="mb-4 d-md-flex justify-content-between align-items-center">
-                        <h2 class="m-0">All videos</h2>
-                    </div>
-                    <div class="tiny-slider arrow-hover arrow-blur arrow-dark arrow-round">
-                        <div class="tiny-slider-inner"
-                            data-autoplay="true"
-                            data-hoverpause="true"
-                            data-gutter="24"
-                            data-arrow="true"
-                            data-dots="false"
-                            data-items-xl="4" 
-                            data-items-md="3" 
-                            data-items-sm="2" 
-                            data-items-xs="1">
-    
-                            <!-- Card item START -->
-                            {% for video in all_videos %}
-                            <div class="card card-overlay-bottom card-img-scale">
-                                <!-- Card Image -->
-                                <img class="card-img h-200" src="{{ video.image.url }}" alt="">
-                                <!-- Card Image overlay -->
-                                <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
-                                    <div class="w-100 mt-auto">
-                                        <!-- Card title -->
-                                        <h6 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link text-reset stretched-link">{{ video.title }}</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            {% endfor %}
 
-                            
-                            <!-- Card item END -->
-                        </div>
-                    </div>
-                </div>
+
+<div class="row card-grid my-3">
+   {% include 'content/content/videocategories.html' %}
+   <div class="col-lg-4 mt-0">
+      <div class="row">
+        {% for video in latest_videos %}
+         <div class="col-md-6">
+            <div class="card card-overlay-bottom card-grid-sm card-fold rounded-0" style="background-image:url({{ video.image.url }}); background-position: center left; background-size: cover;">
+               <div class="position-absolute top-50 start-50 translate-middle pb-5">
+                  <a href="{{ video.get_absolute_url }}" class="icon-lg bg-primary d-block text-white rounded-circle" >
+                     <i class="bi bi-play-btn"></i>
+                  </a>
+               </div>
+               <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+                  <div class="w-100 mt-auto">
+                     <h4 class="text-white"><a href="{{ video.get_absolute_url }}" class="btn-link stretched-link text-reset">{{ video.title }}</a></h4>
+                  </div>
+               </div>
             </div>
-        </div>
-    </section>
-    <!-- =======================
-    Section END -->
+         </div>
+         <!-- Card item END -->
+         {% endfor %}
+      </div>
+   </div>
+</div>
+
+{% for ct in all_categs %}
+<section class="pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+					<h2 class="">{{ct.name}}</h2>
+				<div class="tiny-slider arrow-hover arrow-blur arrow-dark arrow-round">
+					<div class="tiny-slider-inner"
+						data-autoplay="true"
+						data-hoverpause="true"
+						data-gutter="24"
+						data-arrow="true"
+						data-dots="false"
+						data-items-xl="4" 
+						data-items-md="3" 
+						data-items-sm="2" 
+						data-items-xs="1">
+                  {% for video in ct.videocat.all %}
+						<div class="card">
+							<div class="position-relative">
+								<img class="card-img" src="{{ video.image.url }}" alt="Card image">
+								<div class="card-img-overlay d-flex align-items-start flex-column p-3">
+									<div class="w-100 mb-auto d-flex justify-content-end">
+										<div class="text-end ms-auto">
+											<div class="icon-md bg-white-soft bg-blur text-white fw-bold rounded-circle" title="8.5 rating">LOGO</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="card-body px-0 pt-3">
+								<h5 class="card-title"><a href="post-single-3.html" class="btn-link text-reset fw-bold">{{video.title}}</a></h5>
+                        <div class="d-flex justify-content-between">
+                           <p class="">
+                              <i class="bi bi-eye"></i>  633.8k
+                            </p>
+                            <p class="">
+                              <i class="bi bi-heart"></i>  1.8k
+                            </p>
+                            <p class="">
+                              <i class="bi bi-chat-left"></i>  26
+                            </p>
+                        </div>
+							</div>
+						</div> 
+                  {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
 {% endblock %}
