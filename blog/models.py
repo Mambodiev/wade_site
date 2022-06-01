@@ -11,10 +11,14 @@ User = get_user_model()
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
     image = models.ImageField(upload_to='media/', default='images/default.png')
 =======
     image = models.ImageField(upload_to='media/',  blank=True, null=True)
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+    image = models.ImageField(upload_to='media/',  blank=True, null=True)
+>>>>>>> s3success
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
@@ -35,12 +39,17 @@ class Category(models.Model):
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 <<<<<<< HEAD
+<<<<<<< HEAD
     profile_picture = models.ImageField(upload_to='media/', default='images/default.png')
     about_author = models.TextField(default='Wade est rédacteur en chef du blogzine et fait également des reportages sur les dernières nouvelles basées à Londres.')
 =======
     profile_picture = models.ImageField(upload_to='media/', blank=True, null=True)
     about_author = models.TextField(blank=True, null=True)
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+    profile_picture = models.ImageField(upload_to='media/', blank=True, null=True)
+    about_author = models.TextField(blank=True, null=True)
+>>>>>>> s3success
 
 
     def __str__(self):
@@ -56,10 +65,14 @@ class Post(models.Model):
         created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_creator')
         title = models.CharField(max_length=255)
 <<<<<<< HEAD
+<<<<<<< HEAD
         thumbnail = models.ImageField(upload_to='media/', default='images/default.png')
 =======
         thumbnail = models.ImageField(upload_to='media/')
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+        thumbnail = models.ImageField(upload_to='media/')
+>>>>>>> s3success
         slug = models.SlugField(max_length=255, blank=True, null=True,)
         author = models.ForeignKey(Author, on_delete=models.CASCADE)
         about_author = models.CharField(max_length=255)

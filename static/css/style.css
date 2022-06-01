@@ -16189,11 +16189,15 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
   border: 0px solid #939393; 
   border-radius: 50px;
   color: #595d69;
+<<<<<<< HEAD
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+>>>>>>> s3success
 }
 .selectpicker, input:focus{
   outline: none!important;
   list-style:none!important;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -16201,9 +16205,14 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
 .nav-search{
   font-size: 0.8375rem !important;
 =======
+=======
+>>>>>>> s3success
   background: white; 
 }
 .selectpicker:hover {
   border: 0px solid #92a8d1;
+<<<<<<< HEAD
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+>>>>>>> s3success
 }

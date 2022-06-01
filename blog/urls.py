@@ -17,9 +17,12 @@ urlpatterns = [
     
 ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 =======
+=======
+>>>>>>> s3success
 
 handler404 = "blog.views.page_not_found_view"
 

@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 	
 
@@ -22,15 +23,21 @@
 	<!-- Theme CSS -->
 	{% comment %} <link id="style-switch" rel="stylesheet" type="text/css" href="{% static  'css/style.css' %}"> {% endcomment %}
 =======
+=======
+>>>>>>> s3success
 	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static '/vendor/font-awesome/css/all.min.css' %}" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static  '/vendor/bootstrap-icons/bootstrap-icons.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static  '/vendor/tiny-slider/tiny-slider.css' %}">
+<<<<<<< HEAD
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+>>>>>>> s3success
 	<link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	<!-- Offcanvas START -->
@@ -121,6 +128,24 @@
 								<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
 							</li>
+=======
+
+	<header class="navbar-light navbar-sticky header-static">
+			<nav class="navbar navbar-expand-lg">
+				<div class="container">
+					<a class="navbar-brand"  href="{% url 'blog:home' %}">
+						<img class="navbar-brand-item light-mode-item" src="{% static  'images/logo1.png' %}" alt="logo">				
+					</a>
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav navbar-nav-scroll mx-auto">
+							<li class="nav-item">	
+								<a class="nav-link" href="{% url 'content:video' %}">Vidéo</a>
+							</li>
+							{% for c in categories %}
+							<li class="nav-item" {% if category.slug == c.slug %}{% endif %}>	
+								<a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+							</li>
+>>>>>>> s3success
 							{% endfor %}
 						</ul>
 					</div>
@@ -132,7 +157,10 @@
 =======
 							<a class="nav-link dropdown-toggle" role="button" href="#" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-search fs-6"> </i>
+<<<<<<< HEAD
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+>>>>>>> s3success
 							</a>
 							<div class="dropdown-menu dropdown-menu-end shadow rounded p-2" aria-labelledby="navSearch">
 							<form class="input-group">
@@ -142,6 +170,7 @@
 							</div>
 						</div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 						<!-- LANGUAGE -->
 						<div class="nav-item ">
@@ -178,6 +207,24 @@
 								</select>
 							</form>
 						</div>
+=======
+						<div class="nav-item">
+							<form action="/" method="post" class="language">
+								<input class="form-control"  name="next" type="hidden" value="" />
+								<select name="language" class="selectpicker  mr-2">
+										<option value=".FR" selected="selected">
+										<h5>.FR</h5>
+										<option value=".EN" selected="selected">
+											<h5>.EN</h5>
+										</option>
+										<option value=".ES" selected="selected">
+											<h5>.ES</h5>
+										</option>
+										
+								</select>
+							</form>
+						</div>
+>>>>>>> s3success
 						
 						<!-- Offcanvas menu toggler -->
 						<div class="nav-item">

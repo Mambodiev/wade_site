@@ -1,7 +1,7 @@
 appdirs==1.4.3
 apturl==0.5.2
 asgiref==3.5.0
-<<<<<<< HEAD
+
 bcrypt==3.1.7
 blinker==1.4
 boto3==1.20.54
@@ -20,7 +20,7 @@ defusedxml==0.7.1
 distlib==0.3.0
 distro==1.4.0
 distro-info===0.23ubuntu1
-=======
+
 boto3==1.22.4
 botocore==1.25.4
 certifi==2021.10.8
@@ -29,13 +29,13 @@ charset-normalizer==2.0.12
 cryptography==36.0.1
 defusedxml==0.7.1
 dj-database-url==0.5.0
->>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+
 Django==3.2
 django-allauth==0.48.0
 django-ckeditor==6.2.0
 django-dotenv==1.4.2
 django-environ==0.8.1
-<<<<<<< HEAD
+
 django-js-asset==1.2.2
 django-storages==1.12.3
 docopt==0.6.2
@@ -111,7 +111,6 @@ whitenoise==6.0.0
 xkit==0.0.0
 yarg==0.1.9
 zipp==1.0.0
-=======
 django-js-asset==2.0.0
 django-on-heroku==1.1.2
 django-storages==1.12.3
@@ -120,6 +119,15 @@ idna==3.3
 jmespath==1.0.0
 oauthlib==3.2.0
 Pillow==9.0.0
+django-js-asset==2.0.0
+django-on-heroku==1.1.2
+django-storages==1.12.3
+gunicorn==20.1.0
+idna==3.3
+jmespath==1.0.0
+oauthlib==3.2.0
+Pillow==9.0.0
+
 psycopg2-binary==2.9.1
 pycparser==2.21
 PyJWT==2.3.0
@@ -134,4 +142,5 @@ six==1.16.0
 sqlparse==0.4.2
 urllib3==1.26.8
 whitenoise==6.0.0
->>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+
+

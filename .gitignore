@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -148,6 +148,8 @@ static_root
 .vscode
 .atom
 =======
+=======
+>>>>>>> s3success
 # Django #
 *.log
 *.pot
@@ -286,4 +288,4 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history9
->>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+

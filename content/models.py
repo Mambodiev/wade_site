@@ -38,10 +38,14 @@ class Video(models.Model):
     vimeo_id = models.CharField(max_length=50)
     title = models.CharField(max_length=150)
 <<<<<<< HEAD
+<<<<<<< HEAD
     image = models.ImageField(upload_to='media/', default='images/default.png')
 =======
     image = models.ImageField(upload_to='media/')
 >>>>>>> 9fbfc94279852f12c84bcda9c34a8e57e8403a68
+=======
+    image = models.ImageField(upload_to='media/')
+>>>>>>> s3success
     slug = models.SlugField(unique=True)
     description = models.TextField()
     is_featured = models.BooleanField(default=False)
